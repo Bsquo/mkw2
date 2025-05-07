@@ -1,0 +1,34 @@
+#pragma once
+
+#include "AIInfo.hpp"
+#include "AISpeed.hpp"
+#include "AIRank.hpp"
+#include <egg/core/eggDisposer.hpp>
+
+namespace Enemy {
+
+    class AIManager: public EGG::Disposer {
+        public:
+            static AIManager* createInstance();
+            void destroyInstance();
+            inline AIManager* getInstance() { return spInstance; }
+            u32 getRandU32(u32);
+            f32 getRandF32(f32);
+            inline AIRankManager* getRankManager() { return mpRankManager; }
+
+        private:
+            static AIManager* spInstance;
+
+            s32 mPlayerCount;
+            s32 mEngineClass;
+            s32 mCpuMode;
+            bool mbIsTimeTrials;
+            AI* mpCpuPlayers[MAX_PLAYER_COUNT];
+            AI* mpRealPlayers[MAX_PLAYER_COUNT];
+            AIRankManager* mpRankManager;
+
+            AIManager();
+            virtual ~AIManager();
+    };
+
+}

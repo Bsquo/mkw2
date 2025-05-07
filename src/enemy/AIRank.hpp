@@ -95,4 +95,12 @@ namespace Enemy {
         };
     };
 
+    struct AIRankManager: public Util::StateSequencer<AIRankManager> {
+        AIRankManager();
+        virtual ~AIRankManager();
+        virtual void init();
+        virtual void update();
+        bool isStateSpeedAdvantage();
+    };
+
 }
