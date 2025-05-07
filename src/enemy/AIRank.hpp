@@ -1,12 +1,13 @@
 #pragma once
 
 #include "AIInfo.hpp"
-#include "AISpeed.hpp"
+#include "util/State.hpp"
 
 namespace Enemy {
 
-    struct AIRankGroupBase;
     struct AISpeedBase;
+
+    struct AIRankGroupBase;
 
     struct AIRank {
         virtual ~AIRank();

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "AIInfo.hpp"
-#include "AISpeed.hpp"
 #include "AIRank.hpp"
+#include "AISpeed.hpp"
 #include <egg/core/eggDisposer.hpp>
 
 namespace Enemy {
