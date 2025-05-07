@@ -1,5 +1,8 @@
 #pragma once
 
+#include "AIInfo.hpp"
+#include "AIPath.hpp"
+#include "AIProbability.hpp"
 #include "util/State.hpp"
 
 namespace Enemy {
@@ -7,7 +10,9 @@ namespace Enemy {
     struct AIControlBase: public Util::StateSequencer<AIControlBase> {
         AIInfo* mpInfo;
         AIPathHandler* mpPathHandler;
-        u8 field_0x40[32];
+        void* mpStuck;
+        AIProbabilityBase* mpProbability;
+        u8 field_0x44[28];
     };
 
 }

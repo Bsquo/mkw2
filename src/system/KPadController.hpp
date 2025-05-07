@@ -19,6 +19,13 @@ class RumbleManager;
 ////////// INPUT STATE /////////////////
 
 struct KPadRaceInputState {
+  enum eTrick {
+    UP_TRICK    = 1,
+    DOWN_TRICK  = 2,
+    LEFT_TRICK  = 3,
+    RIGHT_TRICK = 4,
+  };
+
   inline KPadRaceInputState() { reset(); }
   virtual ~KPadRaceInputState() {}                // [vt+0x08]
 

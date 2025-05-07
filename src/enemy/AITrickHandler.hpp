@@ -10,6 +10,9 @@ namespace Enemy {
         virtual void calc();
         virtual void disableWheelie();
         virtual void update();
+        void avoidPow();
+        bool isStartingAirborne();
+        bool shouldTrick();
 
         AIInfo* mpInfo;
     };
@@ -19,6 +22,7 @@ namespace Enemy {
         void vf_0x0C();
         void calc();
         void disableWheelie();
+        void calcWheelie();
         virtual void update();
 
         bool mbPerformWheelie;
@@ -27,6 +31,15 @@ namespace Enemy {
     struct AITrickHandlerBikeUnused: public AITrickHandlerBike {
         ~AITrickHandlerBikeUnused();
         void update();
+    };
+
+    struct struct_121 {
+        struct_121();
+        virtual ~struct_121();
+        virtual void vf_0x0C();
+        virtual void vf_0x10();
+
+        s32 field_0x00;
     };
 
 }
