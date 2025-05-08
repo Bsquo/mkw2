@@ -7,7 +7,12 @@
 
 namespace Enemy {
 
-    class AIManager: public EGG::Disposer {
+    class AIManagerEx {
+        public:
+            virtual ~AIManagerEx();
+    };
+
+    class AIManager: public AIManagerEx, public EGG::Disposer {
         public:
             static AIManager* createInstance();
             static void destroyInstance();
@@ -17,6 +22,9 @@ namespace Enemy {
             inline AIRankManager* getRankManager() { return mpRankManager; }
 
         private:
+            AIManager();
+            virtual ~AIManager();
+
             static AIManager* spInstance;
 
             s32 mPlayerCount;
@@ -26,9 +34,6 @@ namespace Enemy {
             AI* mpCpuPlayers[MAX_PLAYER_COUNT];
             AI* mpRealPlayers[MAX_PLAYER_COUNT];
             AIRankManager* mpRankManager;
-
-            AIManager();
-            virtual ~AIManager();
     };
 
 }
