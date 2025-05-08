@@ -1,5 +1,6 @@
 #include "AI.hpp"
 #include "AIEngine.hpp"
+#include "AIManager.hpp"
 #include "AITrickHandler.hpp"
 #include "AIProbability.hpp"
 #include "AIControl.hpp"
@@ -14,6 +15,7 @@ struct_121::struct_121(s32 arg0) {
 struct_121::~struct_121() {}
 
 void struct_121::vf_0x0C() {}
+
 void struct_121::vf_0x10() {}
 
 void AITrickHandler::avoidPow() {
@@ -32,13 +34,81 @@ bool AITrickHandler::isStartingAirborne() {
 
 bool AITrickHandler::shouldTrick() {
     AIProbabilityBase* probability = mpInfo->mpAI->mpEngine->mpControl->getAIProbability();
-    bool startingAirborne = isStartingAirborne();
 
-    if (startingAirborne && probability->getTrick()) {
+    if (isStartingAirborne() && probability->getTrick()) {
         return true;
     }
     
     return false;
 }
-    
+
+AITrickHandler::AITrickHandler(AIInfo* info): mpInfo(info) {}
+
+AITrickHandler::~AITrickHandler() {}
+
+void AITrickHandler::vf_0x0C() {}
+
+void AITrickHandler::calc() {
+    update();
+}
+
+void AITrickHandler::disableWheelie() {}
+
+void AITrickHandler::update() {
+    if (shouldTrick()) {
+        System::KPadRaceInputState* input = mpInfo->mpInput;
+        
+        const int kartTricks[2] = {
+            System::KPadRaceInputState::UP_TRICK,
+            System::KPadRaceInputState::DOWN_TRICK
+        };
+        
+        int rand = AIManager::getInstance()->getRandU32(ARRAY_COUNT(kartTricks));
+        input->setTrick(kartTricks[rand]);
+    }
+}
+
+AITrickHandlerBike::AITrickHandlerBike(AIInfo* info): AITrickHandler(info) {}
+
+AITrickHandlerBike::~AITrickHandlerBike() {}
+
+void AITrickHandlerBike::vf_0x0C() {}
+
+void AITrickHandlerBike::calc() {
+    update();
+    calcWheelie();
+}
+
+void AITrickHandlerBike::disableWheelie() {
+    mbPerformWheelie = false;
+}
+
+void AITrickHandlerBike::update() {
+    if (shouldTrick()) {
+        System::KPadRaceInputState* input = mpInfo->mpInput;
+        
+        const int bikeTricks[4] = {
+            System::KPadRaceInputState::UP_TRICK,
+            System::KPadRaceInputState::DOWN_TRICK,
+            System::KPadRaceInputState::LEFT_TRICK,
+            System::KPadRaceInputState::RIGHT_TRICK,
+        };
+        
+        int rand = AIManager::getInstance()->getRandU32(ARRAY_COUNT(bikeTricks));
+        input->setTrick(bikeTricks[rand]);
+    }
+}
+
+AITrickHandlerBikeUnused::AITrickHandlerBikeUnused(AIInfo* info): AITrickHandlerBike(info) {}
+
+AITrickHandlerBikeUnused::~AITrickHandlerBikeUnused() {}
+
+void AITrickHandlerBikeUnused::update() {
+    if (shouldTrick()) {
+        System::KPadRaceInputState* input = mpInfo->mpInput;
+
+        input->setTrick(System::KPadRaceInputState::UP_TRICK);
+    }
+}
+
 }

@@ -10,8 +10,8 @@ namespace Enemy {
     class AIManager: public EGG::Disposer {
         public:
             static AIManager* createInstance();
-            void destroyInstance();
-            inline AIManager* getInstance() { return spInstance; }
+            static void destroyInstance();
+            static inline AIManager* getInstance() { return spInstance; }
             u32 getRandU32(u32);
             f32 getRandF32(f32);
             inline AIRankManager* getRankManager() { return mpRankManager; }
