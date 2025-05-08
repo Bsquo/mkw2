@@ -62,7 +62,7 @@ namespace Enemy {
         PointParam* mpPrevPointParam;
         PointParam* mpCurrPointParam;
         PointParam* mpNextPointParam;
-        AIPathPoint* mpPaathPoint;
+        AIPathPoint* mpPathPoint;
         s32 field_0x18;
         bool field_0x1C;
         bool field_0x20;
