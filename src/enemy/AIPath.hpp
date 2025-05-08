@@ -1,8 +1,10 @@
 #pragma once
 
-#include <rk_types.h>
+#include <egg/math/eggVector.hpp>
 
 namespace Enemy {
+
+    struct AIPathManager;
 
     struct PointParam {
         virtual ~PointParam();
@@ -30,8 +32,25 @@ namespace Enemy {
         f32 field_0x10;
     };
 
-    struct AIPathPoint {
-        u8 field_0x00[0x44];
+    struct AIPathPointInfo {
+        AIPathPointInfo();
+        virtual ~AIPathPointInfo();
+
+        AIPathManager* mpPathManager;
+        s8 mStartingPoint;
+        s8 mPointIdxLog[5];  // List of the last 5 enemy points that have been traversed
+        s32 field_0x10;
+        EGG::Vector3f mTargetTrans;
+        f32 field_0x20;
+        f32 field_0x24;
+        f32 offsetRate;
+        f32 field_0x2C;
+        s32 mPlayerIdx;
+    };
+
+    struct AIPathPoint: public AIPathPointInfo {
+        void* mpBattleSearcher;
+        EGG::Vector3f field_0x38;
     };
 
     struct AIPathHandler {
@@ -43,7 +62,7 @@ namespace Enemy {
         PointParam* field_0x08;
         PointParam* field_0x0C;
         PointParam* field_0x10;
-        AIPathPoint* field_0x14;
+        AIPathPoint* mpPaathPoint;
         s32 field_0x18;
         bool field_0x1C;
         bool field_0x20;
@@ -56,6 +75,14 @@ namespace Enemy {
         f32 field_0x34;
         f32 field_0x38;
         f32 field_0x3C;
+    };
+
+    struct AIPathManager {
+        AIPathManager();
+        virtual ~AIPathManager();
+
+        AIPathHandler* mpPlayers[MAX_PLAYER_COUNT];
+        u32 mPlayerCount;
     };
 
 }
