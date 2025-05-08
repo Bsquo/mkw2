@@ -83,6 +83,37 @@ void AITrickHandlerBike::disableWheelie() {
     mbPerformWheelie = false;
 }
 
+void AITrickHandlerBike::calcWheelie() {
+    AIProbabilityBase* probability = mpInfo->mpAI->mpEngine->mpControl->getAIProbability();
+    AIPathHandler* pathHandler = mpInfo->mpPathHandler;
+
+    if (pathHandler->isSwitchingPath()) {
+        bool disableWheelie = false;
+
+        AIRankManager* rankManager = AIManager::getInstance()->getRankManager();
+        if (rankManager != nullptr) {
+            if (rankManager->isStateSpeedAdvantage()) {
+                disableWheelie = true;
+            }
+        }
+
+        System::KPadRaceInputState* input = mpInfo->mpInput;
+
+        if (pathHandler->field_0x0C->shouldWheelie() && probability->getWheelie() && !disableWheelie) {
+            mbPerformWheelie = true;
+        }
+
+        if (pathHandler->field_0x0C->shouldEndWheelie()) {
+            mbPerformWheelie = false;
+            input->setTrick(System::KPadRaceInputState::DOWN_TRICK);
+        }
+
+        if (mbPerformWheelie) {
+            input->setTrick(System::KPadRaceInputState::UP_TRICK);
+        }
+    }
+}
+
 void AITrickHandlerBike::update() {
     if (shouldTrick()) {
         System::KPadRaceInputState* input = mpInfo->mpInput;
