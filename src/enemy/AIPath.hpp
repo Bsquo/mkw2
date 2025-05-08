@@ -59,9 +59,9 @@ namespace Enemy {
         bool isSwitchingPath();
         
         bool mbIsSwitchingPath;
-        PointParam* field_0x08;
-        PointParam* field_0x0C;
-        PointParam* field_0x10;
+        PointParam* mpPrevPointParam;
+        PointParam* mpCurrPointParam;
+        PointParam* mpNextPointParam;
         AIPathPoint* mpPaathPoint;
         s32 field_0x18;
         bool field_0x1C;
@@ -83,6 +83,34 @@ namespace Enemy {
 
         AIPathHandler* mpPlayers[MAX_PLAYER_COUNT];
         u32 mPlayerCount;
+    };
+
+    struct GoNextInfo {
+        bool field_0x00;
+        EGG::Vector3f field_0x04;
+        u8 field_0x10;
+        u8 field_0x11;
+        s32 field_0x14;
+        u32 field_0x18;
+        bool field_0x1C;
+        bool field_0x1D;
+        bool mbInBullet;
+        s32 mNextSearchMode;
+        bool field_0x24;
+        f32 field_0x28;
+
+        enum eSearchMode {
+            GO_TO_RANDOM_POINT         = 0,
+            GO_TO_RANDOM_POINT_2       = 2,
+            GO_TO_ITEM_POINT_HIGHEST   = 3,
+            GO_TO_ITEM_POINT_LOWEST    = 4,
+            GO_TO_FRIEND_POINT_HIGHEST = 5,
+            GO_TO_RIVAL_POINT_HIGHEST  = 6,
+            GO_TO_FRIEND_POINT_LOWEST  = 7,
+            GO_TO_COIN_POINT_HIGHEST   = 8,
+            GO_TO_NEAREST_TARGET       = 9,
+            GO_TO_FARTHEST_TARGET      = 10
+        };
     };
 
 }

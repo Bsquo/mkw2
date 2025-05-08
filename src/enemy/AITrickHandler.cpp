@@ -99,11 +99,11 @@ void AITrickHandlerBike::calcWheelie() {
 
         System::KPadRaceInputState* input = mpInfo->mpInput;
 
-        if (pathHandler->field_0x0C->shouldWheelie() && probability->getWheelie() && !disableWheelie) {
+        if (pathHandler->mpCurrPointParam->shouldWheelie() && probability->getWheelie() && !disableWheelie) {
             mbPerformWheelie = true;
         }
 
-        if (pathHandler->field_0x0C->shouldEndWheelie()) {
+        if (pathHandler->mpCurrPointParam->shouldEndWheelie()) {
             mbPerformWheelie = false;
             input->setTrick(System::KPadRaceInputState::DOWN_TRICK);
         }
