@@ -195,7 +195,7 @@ public:
     // Same as above, but inlined. Needed for some functions to match
     inline Player& getPlayerInlined(u8 idx) { return mPlayers[idx]; }
     inline const Player::Type getPlayerType(u8 idx) const { return mPlayers[idx].getPlayerTypeInlined(); }
-    inline BattleTeam getPlayerTeam(u8 idx) { return mPlayers[idx].getTeam(); }
+    inline BattleTeam getPlayerTeam(u8 idx) { return mPlayers[idx].mTeam; }
 
     inline bool isOnline(Settings::GameMode mode) {
       bool ret = false;

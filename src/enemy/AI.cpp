@@ -37,7 +37,7 @@ void AI::init() {
     mFlags = 0;
 
     if (isTeamsEnabled()) {
-        s32 team = System::RaceConfig::spInstance->mRaceScenario.getPlayerInlined(getPlayerIdx()).mTeam;
+        s32 team = System::RaceConfig::spInstance->mRaceScenario.getPlayerTeam(getPlayerIdx());
 
         if (team == System::BATTLE_TEAM_RED) {
             mTeam = System::BATTLE_TEAM_RED;
