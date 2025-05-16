@@ -22,9 +22,13 @@ void AITrickHandler::avoidPow() {
     mpInfo->mpInput->setTrick(System::KPadRaceInputState::UP_TRICK);
 }
 
-bool AITrickHandler::isStartingAirborne() {
+bool AITrickHandler::allowTricking() {
     Kart::KartState* state = mpInfo->mpAI->kartState();
 
+    /**
+     * Ensure that CPUs can only request tricking when they are in the air and 
+     * not when they're on a jump pad or mushroom trampoline, or while hit with an object.
+     */
     if (state->on(Kart::KART_FLAG_AIR_START) && !state->on(Kart::KART_FLAG_JUMPPAD) && !state->on(Kart::KART_FLAG_HIT_ITEM_OR_OBJ)) {
         return true;
     }
@@ -35,7 +39,7 @@ bool AITrickHandler::isStartingAirborne() {
 bool AITrickHandler::shouldTrick() {
     AIProbabilityBase* probability = mpInfo->mpAI->mpEngine->mpControl->getAIProbability();
 
-    if (isStartingAirborne() && probability->getTrick()) {
+    if (allowTricking() && probability->getTrick()) {
         return true;
     }
     
