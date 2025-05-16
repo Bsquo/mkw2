@@ -8,8 +8,7 @@ extern const CourseId COURSE_ORDER[8][4];
 extern const u8 VS_POINT_DISTRIBUTION[MAX_PLAYER_COUNT][MAX_PLAYER_COUNT];
 extern const s32 RANK_SCORES[5];
 extern const u16 SCORES[4];
-extern const s32 missionToCompetitionObjectives[13];
-extern const s32 lbl_8089011c[2];
+extern const s32 missionToCompetitionObjectives[15];
 extern const char lbl_80890124[][0x12];
 
 const f32 ZERO_FLOAT = 0;
@@ -473,7 +472,7 @@ void RaceConfig::Scenario::initRng() {
 }
 
 // This array maps mission objectives to competition objectives.
-const s32 missionToCompetitionObjectives[13] = {
+const s32 missionToCompetitionObjectives[15] = {
   OBJECTIVE_DEFAULT,
   OBJECTIVE_DEFAULT,
   OBJECTIVE_DEFAULT,
@@ -486,11 +485,9 @@ const s32 missionToCompetitionObjectives[13] = {
   OBJECTIVE_DEFAULT,
   OBJECTIVE_DEFAULT,
   OBJECTIVE_LAPRUN01,
-  OBJECTIVE_LAPRUN02
-};
-
-const s32 lbl_8089011c[2] = {
-  0xc030005, 0x40000
+  OBJECTIVE_LAPRUN02,
+  0xc030005,
+  0x40000
 };
 
 extern void* ptr_Nwc24Manager;

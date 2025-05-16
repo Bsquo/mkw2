@@ -79,7 +79,7 @@ struct RawCompetitionFile {
   s32 headerLength;
   s32 field3_0xc;
   RawRKCO rkco;
-  inline u16 getSize() { return MIN(11, rkco.cpuCount); }
+  inline u16 getSize() { return min32(11, rkco.cpuCount); }
 };
 
 struct CompetitionWrapper {
