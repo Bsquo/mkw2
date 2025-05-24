@@ -1,6 +1,7 @@
 #pragma once
 
 #include <rk_types.h>
+#include <rk_common.h>
 
 #include <decomp.h>
 
@@ -305,8 +306,8 @@ public:
   ResourceManager();
 
   MultiDvdArchive** mppSceneArchives;
-  MultiDvdArchive mKartArchives[12];
-  MultiDvdArchive mBackupKartArchives[12]; // TODO: better name
+  MultiDvdArchive mKartArchives[MAX_PLAYER_COUNT];
+  MultiDvdArchive mBackupKartArchives[MAX_PLAYER_COUNT]; // TODO: better name
   DvdArchive mSystemArchives[4];
   JobContext mJobContexts[7];
   EGG::TaskThread* mpTaskThread;
